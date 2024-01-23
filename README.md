@@ -78,7 +78,7 @@ Implements modular exponentiation efficiently using the square-and-multiply algo
 
 #### `decrypt_rsa(ciphertext, private_key)`
 
-Decrypts an RSA-encrypted ciphertext using the provided private key (`n`, `d`). Utilizes modular exponentiation to retrieve the original message.
+Decrypts an RSA-encrypted ciphertext using the provided private key (`d`). Utilizes modular exponentiation to retrieve the original message.
 
 #### `generate_unique_code(length)`
 
