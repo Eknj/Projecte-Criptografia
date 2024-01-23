@@ -93,7 +93,7 @@ For a more in-depth understanding, please refer to the source code for each func
    python your_script__name.py
    
 2. **Open Browser:**
-   Open your web browser and navigate to "http://localhost:5000" to access the chat applicatio
+   - Open your web browser and navigate to "http://localhost:5000" to access the chat applicatio
 
 3. **Tkinter Window:**
-   Once the step 1 has been completed, a Tkinter window will pop up. In this window, all the chat messages from           various rooms will appear decrypted for the server to see.
+   - Once the step 1 has been completed, a Tkinter window will pop up. In this window, all the chat messages from          various rooms will appear decrypted for the server to see.
