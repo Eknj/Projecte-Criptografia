@@ -100,7 +100,12 @@ For a more in-depth understanding, please refer to the source code for each func
 
 ## Changes
 
-- Here i'm going to leave the main changes that affected the base code, if you click [here](https://github.com/techwithtim/Python-Live-Chat-App) you will be redirected to where the base code was referenced.
+- For the primary codebase, major changes were made, particularly in the implementation of RSA encryption for messages. If you want to review the original codebase, you can find it [here](https://github.com/techwithtim/Python-Live-Chat-App).
+
+Clicking the provided link will redirect you to the original repository
+
+Here i leave you the parts that i modified to implement the RSA. 
+
 
 ```python
  @app.route("/", methods=["POST", "GET"])
@@ -156,3 +161,4 @@ For a more in-depth understanding, please refer to the source code for each func
      send(content, to=room)
      rooms[room]["messages"].append(content)
      print(f"{session.get('name')} said: {data['data']}")
+
