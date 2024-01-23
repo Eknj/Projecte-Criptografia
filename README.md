@@ -3,7 +3,7 @@ Final Chriptography project
 
 ## Overview
 
-This repository contains a simple chat application built using Flask and Flask-SocketIO. The application incorporates RSA encryption to secure the messages exchanged between users within a chat room. The encryption keys are generated dynamically for each chat room to enhance security.
+This repository contains a simple chat application built using Flask and Flask-SocketIO. The application incorporates RSA encryption to secure the messages exchanged between users within a chat room. The encryption keys are generated dynamically for each chat room to enhance security. 
 
 ## Features
 
@@ -97,3 +97,62 @@ For a more in-depth understanding, please refer to the source code for each func
 
 3. **Tkinter Window:**
    - Once the step 1 has been completed, a Tkinter window will pop up. In this window, all the chat messages from          various rooms will appear decrypted for the server to see.
+
+## Changes
+
+- Here i'm going to leave the main changes that affected the base code, if you click [here](https://github.com/techwithtim/Python-Live-Chat-App) you will be redirected to where the base code was referenced.
+
+```python
+ @app.route("/", methods=["POST", "GET"])
+ def home():
+     session.clear()
+     if request.method == "POST":
+         name = request.form.get("name")
+         code = request.form.get("code")
+         join = request.form.get("join", False)
+         create = request.form.get("create", False)
+ 
+         if not name:
+             return render_template("home.html", error="Please enter a name.", code=code, name=name)
+ 
+         if join != False and not code:
+             return render_template("home.html", error="Please enter a room code.", code=code, name=name)
+         
+         room = code
+         if create != False:
+             room = generate_unique_code(4)
+             rooms[room] = {"members": 0, "messages": []}
+             room_rsa_keys[room] = generate_key_pair()
+         elif code not in rooms:
+             return render_template("home.html", error="Room does not exist.", code=code, name=name)
+         
+         session["room"] = room
+         session["name"] = name
+         return redirect(url_for("room"))
+ 
+     return render_template("home.html")
+
+ @app.route("/room")
+ def room():
+     room = session.get("room")
+     if room is None or session.get("name") is None or room not in rooms:
+         return redirect(url_for("home"))
+ 
+     return render_template("room.html", code=room, messages=rooms[room]["messages"])
+ 
+ @socketio.on("message")
+ def message(data):
+     room = session.get("room")
+     if room not in rooms:
+         return
+     content = {
+         "name": session.get("name"),
+         "message": data["data"]
+     }
+     public_key = room_rsa_keys.get(room, None)
+     if public_key:
+         encrypted_message = encrypt_rsa(content["message"], public_key)
+         content["message"] = encrypted_message
+     send(content, to=room)
+     rooms[room]["messages"].append(content)
+     print(f"{session.get('name')} said: {data['data']}")
