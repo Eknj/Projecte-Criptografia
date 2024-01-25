@@ -47,7 +47,7 @@ def generate_key_pair():
     d = mod_inverse(e, fi_n)
     
     print(f"Public key (n, e): ({n}, {e})")
-    print(f"Private key (n, d): ({n}, {d})")
+    print(f"Private key (d): ({d})")
     return n, e
 
 def encrypt_rsa(message, public_key):
