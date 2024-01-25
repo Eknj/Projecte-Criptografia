@@ -33,6 +33,8 @@ This project incorporates code or components from the following GitHub projects.
 Uses Flask Sockets to create a live chat room application.
 
 - I watched his tutorial and used it as a base for my project later on i'm gonna show the main diferences.
+  
+- ChatGTP was used as help to decorate the page and with the program
 
 ## Used Libraries
  
